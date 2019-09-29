@@ -1,0 +1,376 @@
+﻿<!--http://diveintohtml5.info/detect.html-->
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Detecting HTML5 Features - Dive Into HTML5</title>
+    </head>
+<body link="#B92121" vlink="#B92121" alink="#B92121">
+<div style = "max-width:960px; margin:0 auto;line-height: 1.6;word-spacing: 2px">
+<font size="4">
+    <header>
+        <p>
+            <span>You are here:</span>
+            <a href = "">Home</a>
+            <span>►</span>
+            <a href = "">Dive Into HTML5</a>
+            <span>►</span>
+        </p>
+        <h1 align="center">
+            №2.
+            <br>
+            DETECTING HTML5 FEATURES
+        </h1>
+        <p align="center">
+            <a href = "">show table of contents</a>
+        </p>
+    </header>
+        <p align="center">
+            <span style="font-size: 180%">&#10087;</span>
+        </p>
+    <article>
+        <h2 align="center">  DIVING IN </h2>
+        <div>
+            <img src="resource/letter_Y.png" style="float: left">
+            <p>
+            ou may well ask: “How can I start using HTML5 if older browsers don’t support it?” But the question itself is 
+            misleading. HTML5 is not one big thing; it is a collection of individual features. So you can’t detect “HTML5
+            support,” because that doesn’t make any sense. But you can detect support for individual features, like canvas,
+            video, or geolocation.
+            </p>
+        </div>
+        <p align="center">
+            <span style="font-size: 180%">&#10087;</span>
+        </p>
+        <h2 align="center"> DETECTION TECHNIQUES </h2> 
+        <div>
+            <p>
+                When your browser renders a web page, it constructs a Document Object Model (DOM), a collection of objects that represent
+                the HTML elements on the page. Every element — every &ltp&gt, every &ltdiv>, every &ltspan> — is represented in the DOM by a
+                different object. (There are also global objects, like window and document, that aren’t tied to specific elements.)
+            </p>
+            <img src="resource/girl.png" style="float: right"> 
+             <p>
+                All DOM objects share a set of common properties, but some objects have more than others. In browsers that support HTML5
+                features, certain objects will have unique properties. A quick peek at the DOM will tell you which features are 
+                supported.
+            </p>
+            <p>
+                There are four basic techniques for detecting whether a browser supports a particular feature. 
+                From simplest to most complex:
+            </p>
+            <ol>
+                <li>
+                    Check if a certain property exists on a global object (such as window or navigator).
+                    <p>
+                        Example: <a href = "">testing for geolocation support</a>
+                    </p>
+                </li>
+                <li>
+                    Create an element, then check if a certain property exists on that element.
+                    <p>
+                        Example: <a href = "">testing for canvas support</a>
+                    </p>
+                </li>
+                <li>
+                    Create an element, check if a certain method exists on that element, then call the method and 
+                    check the value it returns.
+                    <p>
+                        Example: <a href = "">testing which video formats are supported</a>
+                    </p>
+                </li>
+                <li>
+                    Create an element, set a property to a certain value, then check if the property has retained its value.
+                    <p>
+                        Example: <a href = "">testing which &ltinput&gt types are supported</a>
+                    </p>
+                </li>
+            </ol>
+            <p align="center">
+                <span style="font-size: 180%">&#10087;</span>
+            </p>
+            <h2 align="center">MODERNIZR, AN HTML5 DETECTION LIBRARY</h2>
+             <div>
+                <p>
+                    <a href="">Modernizr</a> is an open source, MIT-licensed JavaScript library that detects support for many HTML5 & 
+                    CSS3 features.You should always use the latest version. To use it, include the following &ltscript&gt element at 
+                    the top of your page.
+                </p>
+    <xmp>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dive Into HTML5</title>
+        <script src="modernizr.min.js"></script>
+    </head>                                                       It goes to your <head>
+    <body>
+      ...
+    </body>
+    </html>
+    </xmp>
+                <p>
+                    Modernizr runs automatically. There is no modernizr_init() function to call. When it runs, it creates a global object
+                     called Modernizr, that contains a set of Boolean properties for each feature it can detect. For example, if your 
+                     browser supports the canvas API, the Modernizr.canvas property will be true. If your browser does not support the 
+                     <a href="">canvas API</a>, the Modernizr.canvas property will be false.
+                </p>
+                <div style="margin-left: 50px">
+                <code>
+                    if (Modernizr.canvas) {<br>
+                        // let's draw some shapes!<br>
+                    } else {<br>
+                        // no native canvas support available :(<br>
+                    }
+                </code>
+                </div>
+             </div>
+            <p align="center">
+                    <span style="font-size: 180%">&#10087;</span>
+            </p>
+            <h2 align="center">OFFLINE WEB APPLICATIONS</h2>
+            <div>
+                <div style="margin-left: 800px">
+                <figure style="float: right">
+                <img src="resource/along_stream.png">
+                <figcaption>
+                        Your browser does not support offline web applications. :(
+                </figcaption>
+                </figure>
+                </div>
+                <p>
+                    Reading static web pages offline is easy: connect to the Internet, load a web page, disconnect from the Internet,
+                    drive to a secluded cabin, and read the web page at your leisure. (To save time, you may wish to skip the step
+                    about the cabin.) But what about web applications like <a href="">Gmail</a> or <a href="">Google Docs</a>? 
+                    Thanks to HTML5, anyone (not just Google!) can build a web application that works offline.
+                </p>
+                <p>
+                    <a href="">Offline web applications</a> start out as online web applications. The first time you visit an 
+                     offline-enabled web site, the web server tells your browser which files it needs in order to 
+                     work offline. These files can be anything — HTML, JavaScript, images, even <a href="">videos</a>. Once your 
+                     browser downloads all the necessary files, you can revisit the web site even if you’re not connected 
+                     to the Internet. Your browser will notice that you’re offline and use the files it has already 
+                     downloaded. When you get back online, any changes you’ve made can be uploaded to the remote web server.
+               </p>
+               <p>
+                    Checking for offline support uses <a href="">detection technique #1</a>. If your browser supports offline web applications,
+                     there will be an applicationCache property on the global window object. If your browser doesn’t support 
+                     offline web applications, the applicationCache property will be undefined. You can check for offline 
+                     support with the following function:
+               </p>
+               <div style="margin-left: 50px">
+                    <code>
+                            function supports_offline() {<br>
+                                return !!window.applicationCache;<br>
+                              }
+                    </code>
+                </div>
+                <p>
+                    Instead of writing this function yourself, you can use <a href="">Modernizr</a> (1.1 or later) to detect support
+                     for offline web applications.
+                </p>
+                <div style="margin-left: 50px">
+                        <code>
+                                if (Modernizr.applicationcache) {<br>
+                                    // window.applicationCache is available!<br>
+                                  } else {<br>
+                                    // no native support for offline :(<br>
+                                    // try a fallback or another third-party solution<br>
+                                  }
+                        </code>
+                    </div>
+                    <p>
+                        Note that JavaScript is case-sensitive. The Modernizr attribute is called applicationcache
+                         (all lowercase), but the DOM object is called window.applicationCache (mixed case).
+                    </p>
+
+            </div>
+            <p align="center">
+                <span style="font-size: 180%">&#10087;</span>
+            </p>
+            <h2 align="center">GEOLOCATION</h2>
+            <div>
+                <p>
+                    Geolocation is the art of figuring out where you are in the world and (optionally) sharing that information with
+                    people you trust. There is more than one way to figure out where you are — your IP address, your wireless 
+                    network connection, which cell tower your phone is talking to, or dedicated GPS hardware that calculates
+                    latitude and longitude from information sent by satellites in the sky.
+                </p>
+                <p align="center">
+                    <img src="resource/Earth.png"">
+                </p>
+                <table border="1" style="border-collapse: collapse">
+                        <tr style="background-color:black; color:white;">
+                                <td>
+                                    <h3>DID YOU KNOW?</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="resource/man.png" style="float: right">
+                                    <div style="margin-left: 40px"><p >
+                                            Q: Is geolocation part of HTML5? Why are you talking about it?
+                                            A: Geolocation support is being added to browsers right now, along
+                                             with support for new HTML5 features. Strictly speaking, geolocation 
+                                             is being standardized by the <a href="">Geolocation Working Group</a>, which is 
+                                             separate from the HTML5 Working Group. But I’m going to talk about 
+                                             geolocation in this book anyway, because it’s part of the evolution
+                                              of the web that’s happening now.
+                                    </p></div>
+                                </td>
+                            </tr>
+                </table>
+                <p>
+                    Checking for geolocation support uses <a href="">detection technique #1</a>. If your browser supports the geolocation API,
+                    there will be a geolocation property on the global navigator object. If your browser doesn’t support the 
+                    geolocation API, the geolocation property will not be present inside of navigator. Here’s how to check for
+                    geolocation support:.
+                </p>
+                    <div style="margin-left: 50px">
+                    <code>
+                    function supports_geolocation() {<br>
+                         return 'geolocation' in navigator;<br>
+                    }
+                    </code>
+                </div>
+                <p>
+                    Instead of writing this function yourself, you can use Modernizr to detect support for the geolocation API.
+                </p>
+                <p>
+                    <b>check for geolocation support</b>
+                    <div style="margin-left: 50px"><code>
+                    if (Modernizr.geolocation) {<br>
+                        // let's find out where you are!<br>
+                        } else {<br>
+                        // no native geolocation support available :(<br>
+                        // try geoPosition.js or another third-party solution<br>
+                    }
+                    </code></div>
+                </p>
+                <p>
+                    If your browser does not support the geolocation API natively, there is still hope. <a href="">GeoPosition.js</a> 
+                    is a JavaScript library that aims to provide Geolocation support in older browsers like Blackberry, Palm OS, and 
+                    Microsoft Internet Explorer 6, 7, and 8. It’s not quite the same as the navigator.geolocation API, but it serves
+                    the same purpose.
+                </p>
+                <p>
+                    There are also device-specific geolocation APIs on older mobile phone platforms, including <a href="">BlackBerry</a>,
+                    <a href="">Nokia</a>, <a href="">Palm</a>, and <a href="">OMTP BONDI</a>.
+                </p>
+                <p>
+                    The <a href="">chapter on geolocation</a> will go into excruciating detail about how to use all of these different 
+                    APIs.
+                </p>
+            </div>
+            <p align="center">
+                <span style="font-size: 180%">&#10087;</span>
+            </p> 
+            <h2 align="center">HISTORY API</h2>
+            <div>
+                <image src="resource/demon_reading_Stewart_Orr.png" style="float: left">
+                <p>
+                    <a href="">The HTML5 history API</a> is a standardized way to manipulate the browser history via script. Part of this API 
+                    — navigating the history — has been available in previous versions of HTML. The new part in HTML5 is a way 
+                    to add entries to the browser history, and respond when those entries are removed from the stack by the user 
+                    pressing the browser’s back button. This means that the URL can continue to do its job as a unique identifier
+                     for the current resource, even in script-heavy applications that don’t ever perform a full page refresh.
+                </p>
+                <p>
+                    Checking for HTML5 history API support uses <a href="">detection technique #1</a>. If your browser supports the HTML5 history API,
+                     there will be a pushState() function on the global history object. If your browser doesn’t support the history API,
+                      the pushState() function will be undefined.
+                </p>
+                <div style="margin-left: 50px"><code>
+                    function supports_history_api() {<br>
+                        return !!(window.history && history.pushState);<br>
+                    }
+                </code></div>
+                <p>
+                    Instead of writing this function yourself, you can use <a href="">Modernizr</a> (1.6 or later) to detect support for the 
+                    HTML5 history API.
+                </p>
+                <div style="margin-left: 50px">
+                <p><b>check for history API support</b></p>
+                <code>
+                        if (Modernizr.history) {<br>
+                            // history management works!<br>
+                          } else {<br>
+                            // no history support :(<br>
+                            // fall back to a scripted solution like History.js<br>
+                          }
+                </code></div>
+            </div>
+            <p align="center">
+                    <span style="font-size: 180%">&#10087;</span>
+                </p>
+            <h2 align="center">FURTHER READING</h2>
+            <div>
+                <p>Specifications and standards:</p>
+                <ul>
+                    <li><a href="">the &ltcanvas&gt element</a></li>
+                    <li><a href="">the &ltvideo&gt element</a></li>
+                    <li><a href="">&ltinput&gt types</a></li>
+                    <li><a href="">the &ltinput placeholder&gt attribute</a></li>
+                    <li><a href="">the &ltinput autofocus&gt attribute</a></li>
+                    <li><a href="">HTML5 storage</a></li>
+                    <li><a href="">Web Workers</a></li>
+                    <li><a href="">Offline web applications</a></li>
+                    <li><a href="">Geolocation API</a></li>
+                    <li><a href="">Session history and navigation</a></li>
+                </ul>
+                <p>JavaScript libraries: </p>
+                <ul>
+                    <li><a href="">Modernizr</a>, an HTML5 detection library</li>
+                    <li><a href="">geo.js</a>, a geolocation API wrapper</li>
+                    <li><a href="">HTML5 Cross-browser Polyfills</a></li>
+                </ul>
+                <p>Other articles and tutorials:</p>
+                <ul>
+                    <li><a href="">Video for Everybody!</a></li>
+                    <li><a href="">A gentle introduction to video encoding</a></li>
+                    <li><a href="">Video type parameters</a></li>
+                    <li><a href="">The All-In-One Almost-Alphabetical Guide to Detecting Everything</a></li>
+                    <li><a href="">Internet Explorer 9 Guide for Developers</a></li>
+                </ul>
+                <p align="center">
+                    <span style="font-size: 180%">&#10087;</span>
+                </p>
+                <p>This has been “Detecting HTML5 Features.” <a href="">The full table of contents</a> has more if you’d like to keep reading.</p>
+                <table border="1" style="border-collapse: collapse">
+                        <tr style="background-color:black; color:white;">
+                                <td>
+                                    <h3>DID YOU KNOW?</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="resource/man_and_money.png" style="float: right">
+                                    <div style="margin-left: 40px"><p>
+                                        In association with Google Press, O’Reilly is distributing this book in a variety of formats,
+                                        including paper, ePub, Mobi, and DRM-free PDF. The paid edition is called “HTML5: Up & Running,”
+                                        and it is available now. This chapter is included in the paid edition.
+                                    </p>
+                                    <p>
+                                        If you liked this chapter and want to show your appreciation, you can <a href="">buy “HTML5: Up 
+                                        & Running” with this affiliate link</a> or <a href="">buy an electronic edition directly from 
+                                        O’Reilly</a>. You’ll get a book, and I’ll get a buck. I do not currently accept direct donations.
+                                    </p></div>
+                                </td>
+                            </tr>
+                </table>
+            </div>
+        </div>
+    </article>
+    <footer>
+            <p align="center">
+                Copyright MMIX-MMXI <a href="">Mark Pilgrim</a>
+            </p>
+            <div align="center" id="search_bar">
+                <input type="text" placeholder="powered by Google™"/>
+                <button type="button">Search</button>
+            </div>
+    </footer>
+</font>
+</div>
+</body>
+</html>
+
